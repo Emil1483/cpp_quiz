@@ -3,7 +3,6 @@
 #include <charconv>
 #include <fstream>
 #include <sstream>
-#include <exception>
 #include <algorithm>
 #include <random>
 

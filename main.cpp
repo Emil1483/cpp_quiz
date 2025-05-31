@@ -1,15 +1,4 @@
-#include <vector>
-#include <iostream>
-#include <memory>
-#include <map>
-#include <cassert>
-#include <charconv>
-#include <iomanip>
-#include <iostream>
-#include <optional>
-#include <string_view>
-#include <system_error>
-#include <algorithm>  // for std::find
+#include <algorithm>
 
 #include "question.h"
 
