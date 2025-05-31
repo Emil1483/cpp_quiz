@@ -1,6 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <charconv>
+#include <fstream>
+#include <sstream>
+#include <exception>
+#include <algorithm>
+#include <random>
 
 #include "question.h"
 
@@ -47,4 +52,47 @@ const std::vector<int> inputAnswer() {
 
 std::string formatBool(bool b) {
     return b ? "korrekt" : "feil";
+}
+
+std::ostream& operator<<(std::ostream& os, const Question& q) {
+    os << q.question << "\n";
+    for (int i = 0; i < q.alternatives.size(); i++) {
+        auto alternative = q.alternatives.at(i);
+        os << i << ". " << alternative.text << "\n";
+    }
+    return os;
+}
+
+std::vector<Question> loadQuestions(std::string file) {
+    std::vector<Question> result{};
+
+    std::ifstream istrm(file, std::ios::binary);
+    if (!istrm.is_open()) {
+        throw std::runtime_error("Could not open file " + file);
+    }
+
+    std::string line{};
+    std::getline(istrm, line); // Ignore the header line
+    while (std::getline(istrm, line)) {
+        std::stringstream lineStream(line);
+
+        std::string id,question;
+        std::getline(lineStream, id, ',');
+        std::getline(lineStream, question, ',');
+
+        std::vector<Alternative> alternatives{};
+        std::string text, correct;
+        while (std::getline(lineStream, text, ',')) {
+            std::getline(lineStream, correct, ',');
+            alternatives.emplace_back(Alternative{text, correct == "true"});
+        }
+
+        result.emplace_back(Question{id, question, alternatives});
+    }
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::shuffle(result.begin(), result.end(), gen);
+
+    return result;
 }

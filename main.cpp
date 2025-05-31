@@ -14,61 +14,17 @@
 #include "question.h"
 
 int main() {
-    Question<4> questions[] = {
-        {
-            "test question1",
-            {
-                Alternative{
-                    "test alternative 1",
-                    false,
-                },
-                Alternative{
-                    "test alternative 2",
-                    false,
-                },
-                Alternative{
-                    "test alternative 3",
-                    true,
-                },
-                Alternative{
-                    "test alternative 4",
-                    true,
-                },
-            },
-        },
-        {
-            "test question2",
-            {
-                Alternative{
-                    "test alternative 1",
-                    false,
-                },
-                Alternative{
-                    "test alternative 2",
-                    false,
-                },
-                Alternative{
-                    "test alternative 3",
-                    true,
-                },
-                Alternative{
-                    "test alternative 4",
-                    true,
-                },
-            },
-        },
-    };
-
+    const auto questions = loadQuestions("questions.csv");
 
     for (const auto question : questions) {
-        std::cout << questions[0];
+        std::cout << question;
 
         const auto input = inputAnswer();
 
         int score = 0;
-        const int numAlts = questions[0].alternatives.size();
+        const int numAlts = question.alternatives.size();
         for (int i = 0; i < numAlts; i++) {
-            const auto alt = questions[0].alternatives.at(i);
+            const auto alt = question.alternatives.at(i);
             const auto found = std::find(input.begin(), input.end(), i) != input.end();
             if (alt.isCorrect != found) {
                 std::cout << alt.text << " Var " << formatBool(alt.isCorrect)

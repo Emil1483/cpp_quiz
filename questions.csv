@@ -1,0 +1,4 @@
+Id,Question,Option0,Option0Correct,Option1,Option1Correct,Option2,Option2Correct,Option3,Option3Correct
+1,What is the capital of France?,Paris,true,Berlin,false,Madrid,false,Rome,false
+2,What is the largest planet in our solar system?,Jupiter,true,Saturn,false,Earth,false,Mars,false
+3,What is the boiling point of water at sea level?,100°C,true,90°C,false,80°C,false,120°C,false
