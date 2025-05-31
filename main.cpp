@@ -24,7 +24,7 @@ int main() {
             }
         }
 
-        std::cout << "Du fikk " << score << "/" << numAlts << " riktig!\n";
+        std::cout << "Du fikk " << score << "/" << numAlts << " riktig!\n\n";
     }
 
     std::cout << "Takk for at du spilte med meg!\n";

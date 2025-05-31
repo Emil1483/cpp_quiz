@@ -86,6 +86,12 @@ std::vector<Question> loadQuestions(std::string file) {
             alternatives.emplace_back(Alternative{text, correct == "true"});
         }
 
+        int i = question.find("{n}");
+        while (i != -1) {
+            question = question.replace(i, 3, "\n");
+            i = question.find("{n}");
+        }
+
         result.emplace_back(Question{id, question, alternatives});
     }
 
